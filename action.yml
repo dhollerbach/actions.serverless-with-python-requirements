@@ -1,0 +1,21 @@
+name: 'Serverless with Python Requirements'
+description: 'Installs Serverless and runs a deploy using the serverless-python-requirements plugin'
+inputs:
+  args:
+    default: ''
+    description: 'Additional arguments you want to set'
+    required: false
+  aws-access-key-id:
+    description: 'Your aws access key id'
+    required: true
+  aws-secret-access-key:
+    description: 'Your aws secret access key'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'
+
+branding:
+  icon: 'fast-forward'
+  color: 'red'
