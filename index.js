@@ -17,7 +17,7 @@ if (require.main === module) {
     'sudo apt-get install docker.io -y',
     'sudo systemctl unmask docker',
     'sudo systemctl start docker',
-    'echo Installing Serverless and serverless-python-requirements...',
+    'echo Installing Serverless and plugins...',
     'sudo npm i serverless -g',
     'sudo npm i serverless-python-requirements',
     'sudo npm i serverless-plugin-canary-deployments',
