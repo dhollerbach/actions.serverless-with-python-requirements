@@ -20,6 +20,7 @@ if (require.main === module) {
     'echo Installing Serverless and serverless-python-requirements...',
     'sudo npm i serverless -g',
     'sudo npm i serverless-python-requirements',
+    'sudo npm i serverless-plugin-canary-deployments',
     `echo Running sudo sls deploy ${ARGS}...`,
     `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`,
     `sudo sls deploy ${ARGS}`
