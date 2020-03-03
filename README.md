@@ -1,8 +1,6 @@
 # Serverless with Python Requirements
 
-This actions installs Serverless and runs a deploy using the serverless-python-requirements plugin. You must install the exeq npm package for this plugin to work successfully.
-
-[npm: exeq](https://www.npmjs.com/package/exeq)
+This actions installs Serverless and runs a deploy using the serverless-python-requirements plugin.
 
 ## Inputs
 
