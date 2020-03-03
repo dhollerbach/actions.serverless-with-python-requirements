@@ -21,10 +21,6 @@ This actions installs Serverless and runs a deploy using the serverless-python-r
 ## Example usage
 
 ```
-- name: Install npm packages
-  run: |
-    npm i exeq
-
 - name: Deploy
   uses: dhollerbach/github-action-serverless-with-python-requirements@master
   with:
