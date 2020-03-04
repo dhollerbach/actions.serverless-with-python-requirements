@@ -12,7 +12,7 @@ var AWS_SECRET_ACCESS_KEY = core.getInput('aws-secret-access-key')
 
 //  Reinstalls Docker on Ubuntu
 async function installDocker() {
-  exeq(
+  await exeq(
     'echo Installing docker...',
     'sudo apt-get install docker.io -y',
     'sudo systemctl unmask docker',
@@ -22,7 +22,7 @@ async function installDocker() {
 
 //  Installs Serverless and specified plugins
 async function installServerlessAndPlugins() {
-  exeq(
+  await exeq(
     'echo Installing Serverless and plugins...',
     'sudo npm i serverless -g',
     'sudo npm i serverless-python-requirements',
@@ -32,7 +32,7 @@ async function installServerlessAndPlugins() {
 
 //  Runs Serverless deploy including any provided args
 async function runServerlessDeploy() {
-  exeq(
+  await exeq(
     `echo Running sudo sls deploy ${ARGS}...`,
     `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`,
     `sudo sls deploy ${ARGS}`
