@@ -40,10 +40,13 @@ async function runServerlessDeploy() {
 }
 
 //  Main function
-(async () => {
-  if (require.main === module) {
-    await installDocker()
-    await installServerlessAndPlugins()
-    await runServerlessDeploy()
-  }
-})();
+async handler() {
+  await installDocker()
+  await installServerlessAndPlugins()
+  await runServerlessDeploy()
+}
+
+
+if (require.main === module) {
+  handler()
+}
