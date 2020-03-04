@@ -40,7 +40,7 @@ async function runServerlessDeploy() {
 }
 
 //  Main function
-async handler() {
+async function handler() {
   await installDocker()
   await installServerlessAndPlugins()
   await runServerlessDeploy()
