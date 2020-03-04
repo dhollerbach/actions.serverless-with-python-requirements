@@ -39,14 +39,14 @@ async function runServerlessDeploy() {
   )
 }
 
-//  Main function
+//  Runs all functions in sequence
 async function handler() {
   await installDocker()
   await installServerlessAndPlugins()
   await runServerlessDeploy()
 }
 
-
+//  Main function
 if (require.main === module) {
   handler()
 }
