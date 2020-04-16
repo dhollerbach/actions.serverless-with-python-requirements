@@ -10,6 +10,14 @@ var AWS_ACCESS_KEY_ID = core.getInput('aws-access-key-id')
 var AWS_SECRET_ACCESS_KEY = core.getInput('aws-secret-access-key')
 
 
+//  Updates Ubuntu
+async function updateUbuntu() {
+  await exeq(
+    'echo Updating ubuntu...',
+    'sudo apt-get update -y'
+  )
+}
+
 //  Reinstalls Docker on Ubuntu
 async function installDocker() {
   await exeq(
@@ -41,6 +49,7 @@ async function runServerlessDeploy() {
 
 //  Runs all functions in sequence
 async function handler() {
+  await updateUbuntu()
   await installDocker()
   await installServerlessAndPlugins()
   await runServerlessDeploy()
