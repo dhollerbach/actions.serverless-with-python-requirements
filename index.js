@@ -18,6 +18,17 @@ async function updateUbuntu() {
   )
 }
 
+//  Installs python3.7
+async function installPython() {
+  await exeq(
+    'echo Installing python3...',
+    'sudo apt-get install software-properties-common -y',
+    'sudo add-apt-repository ppa:deadsnakes/ppa -y',
+    'sudo apt-get install python3.7 -y',
+    'sudo python --version'
+  )
+}
+
 //  Reinstalls Docker on Ubuntu
 async function installDocker() {
   await exeq(
