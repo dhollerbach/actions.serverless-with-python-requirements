@@ -61,7 +61,7 @@ async function setServerlessCredentials() {
 //  Runs Serverless deploy including any provided args
 async function runServerlessDeploy(setCredentials) {
   await exeq(
-    `echo ${SERVERLESS_ACCESS_KEY}`,
+    `echo SERVERLESS_ACCESS_KEY IS ${SERVERLESS_ACCESS_KEY}`,
     `echo Running sudo sls deploy ${ARGS}...`,
     `${setCredentials}`,
     `sudo sls deploy ${ARGS}`
