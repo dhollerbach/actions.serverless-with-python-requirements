@@ -49,7 +49,7 @@ async function installServerlessAndPlugins() {
 // }
 
 //  Runs Serverless deploy including any provided args
-async function runServerlessDeploy(setCredentials) {
+async function runServerlessDeploy() {
   await exeq(
     `echo Running sudo sls deploy ${ARGS}...`,
     `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`,
@@ -63,7 +63,7 @@ async function handler() {
   await installDocker()
   await installServerlessAndPlugins()
   // var setCredentials = await setServerlessCredentials()
-  await runServerlessDeploy(setCredentials)
+  await runServerlessDeploy()
 }
 
 //  Main function
