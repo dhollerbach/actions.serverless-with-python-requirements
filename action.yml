@@ -12,6 +12,7 @@ inputs:
     description: 'Your aws secret access key'
     required: false
   serverless-access-key:
+    default: ''
     description: 'Your serverless access key'
     required: false
 
