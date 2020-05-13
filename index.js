@@ -74,6 +74,7 @@ async function handler() {
   await installDocker()
   await installServerlessAndPlugins()
   // var setCredentials = await setServerlessCredentials()
+  await installPython()
   await runServerlessDeploy()
 }
 
