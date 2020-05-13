@@ -1,5 +1,5 @@
 name: 'Serverless with Python Requirements'
-description: 'Installs Serverless and runs a deploy using the serverless-python-requirements plugin'
+description: 'Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.'
 inputs:
   args:
     default: ''
