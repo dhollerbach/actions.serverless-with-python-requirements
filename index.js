@@ -8,7 +8,7 @@ var exeq = require('exeq')
 var ARGS = core.getInput('args')
 var AWS_ACCESS_KEY_ID = core.getInput('aws-access-key-id')
 var AWS_SECRET_ACCESS_KEY = core.getInput('aws-secret-access-key')
-
+var SERVERLESS_ACCESS_KEY = core.getInput('serverless-access-key')
 
 //  Updates Ubuntu
 async function updateUbuntu() {
@@ -38,11 +38,21 @@ async function installServerlessAndPlugins() {
   )
 }
 
+//  Uses SERVERLESS_ACCESS_KEY if provided, else AWS credentials
+async function setServerlessCredentials() {
+  if (`${SERVERLESS_ACCESS_KEY}`) {
+    var setCredentials = `export SERVERLESS_ACCESS_KEY=${SERVERLESS_ACCESS_KEY}`
+  } else {
+    var setCredentials = `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`
+  }
+  return setCredentials
+}
+
 //  Runs Serverless deploy including any provided args
-async function runServerlessDeploy() {
+async function runServerlessDeploy(setCredentials) {
   await exeq(
     `echo Running sudo sls deploy ${ARGS}...`,
-    `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`,
+    `${setCredentials}`,
     `sudo sls deploy ${ARGS}`
   )
 }
@@ -52,7 +62,8 @@ async function handler() {
   await updateUbuntu()
   await installDocker()
   await installServerlessAndPlugins()
-  await runServerlessDeploy()
+  var setCredentials = await setServerlessCredentials()
+  await runServerlessDeploy(setCredentials)
 }
 
 //  Main function
