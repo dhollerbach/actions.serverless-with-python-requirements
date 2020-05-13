@@ -8,7 +8,7 @@ var exeq = require('exeq')
 var ARGS = core.getInput('args')
 var AWS_ACCESS_KEY_ID = core.getInput('aws-access-key-id')
 var AWS_SECRET_ACCESS_KEY = core.getInput('aws-secret-access-key')
-// var SERVERLESS_ACCESS_KEY = core.getInput('serverless-access-key')
+var SERVERLESS_ACCESS_KEY = core.getInput('serverless-access-key')
 
 //  Updates Ubuntu
 async function updateUbuntu() {
@@ -18,13 +18,13 @@ async function updateUbuntu() {
   )
 }
 
-//  Installs python3.7
+//  Installs python3.8
 async function installPython() {
   await exeq(
     'echo Installing python3...',
     'sudo apt-get install software-properties-common -y',
     'sudo add-apt-repository ppa:deadsnakes/ppa -y',
-    'sudo apt-get install python3.7 -y',
+    'sudo apt-get install python3.8 -y',
     'sudo python --version'
   )
 }
@@ -49,15 +49,15 @@ async function installServerlessAndPlugins() {
   )
 }
 
-// //  Uses SERVERLESS_ACCESS_KEY if provided, else AWS credentials
-// async function setServerlessCredentials() {
-//   if (`${SERVERLESS_ACCESS_KEY}`) {
-//     var setCredentials = `export ${SERVERLESS_ACCESS_KEY}`
-//   } else {
-//     var setCredentials = `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`
-//   }
-//   return setCredentials
-// }
+//  Uses SERVERLESS_ACCESS_KEY if provided, else AWS credentials
+async function setServerlessCredentials() {
+  if (`${SERVERLESS_ACCESS_KEY}`) {
+    var setCredentials = `export ${SERVERLESS_ACCESS_KEY}`
+  } else {
+    var setCredentials = `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`
+  }
+  return setCredentials
+}
 
 //  Runs Serverless deploy including any provided args
 async function runServerlessDeploy() {
@@ -71,11 +71,11 @@ async function runServerlessDeploy() {
 //  Runs all functions in sequence
 async function handler() {
   await updateUbuntu()
+  await installPython()
   await installDocker()
   await installServerlessAndPlugins()
-  // var setCredentials = await setServerlessCredentials()
-  await installPython()
-  await runServerlessDeploy()
+  var setCredentials = await setServerlessCredentials()
+  await runServerlessDeploy(setCredentials)
 }
 
 //  Main function

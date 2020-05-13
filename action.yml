@@ -7,10 +7,13 @@ inputs:
     required: false
   aws-access-key-id:
     description: 'Your aws access key id'
-    required: true
+    required: false
   aws-secret-access-key:
     description: 'Your aws secret access key'
-    required: true
+    required: false
+  serverless-access-key:
+    description: 'Your serverless access key'
+    required: false
 
 runs:
   using: 'node12'
