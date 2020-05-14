@@ -1,7 +1,7 @@
 //  Packages
 var core = require('@actions/core')
 var execSync = require('child_process').execSync
-code = execSync('sudo npm install exeq --save')
+code = execSync('npm install exeq --save')
 var exeq = require('exeq')
 
 //  Environment Vars
@@ -14,7 +14,7 @@ var SERVERLESS_ACCESS_KEY = core.getInput('serverless-access-key')
 async function updateUbuntu() {
   await exeq(
     'echo Updating ubuntu...',
-    'sudo apt-get update -y'
+    'apt-get update -y'
   )
 }
 
@@ -22,9 +22,9 @@ async function updateUbuntu() {
 async function installPython() {
   await exeq(
     'echo Installing python3...',
-    'sudo apt-get install software-properties-common -y',
-    'sudo add-apt-repository ppa:deadsnakes/ppa -y',
-    'sudo apt-get install python3.8 -y',
+    'apt-get install software-properties-common -y',
+    'add-apt-repository ppa:deadsnakes/ppa -y',
+    'apt-get install python3.8 -y',
   )
 }
 
@@ -32,9 +32,9 @@ async function installPython() {
 async function installDocker() {
   await exeq(
     'echo Installing docker...',
-    'sudo apt-get install docker.io -y',
-    'sudo systemctl unmask docker',
-    'sudo systemctl start docker'
+    'apt-get install docker.io -y',
+    'systemctl unmask docker',
+    'systemctl start docker'
   )
 }
 
@@ -42,22 +42,22 @@ async function installDocker() {
 async function installServerlessAndPlugins() {
   await exeq(
     'echo Installing Serverless and plugins...',
-    'sudo npm i serverless -g',
-    'sudo npm i serverless-python-requirements',
-    'sudo npm i serverless-plugin-canary-deployments'
+    'npm i serverless -g',
+    'npm i serverless-python-requirements',
+    'npm i serverless-plugin-canary-deployments'
   )
 }
 
 //  Runs Serverless deploy including any provided args
 async function runServerlessDeploy() {
   await exeq(
-    `echo Running sudo sls deploy ${ARGS}...`,
+    `echo Running sls deploy ${ARGS}...`,
     `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
       export SERVERLESS_ACCESS_KEY="${SERVERLESS_ACCESS_KEY}"
     else
-      sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
+      sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
-    `sudo sls deploy ${ARGS}`
+    `sls deploy ${ARGS}`
   )
 }
 
