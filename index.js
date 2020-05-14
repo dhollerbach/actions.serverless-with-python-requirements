@@ -26,10 +26,10 @@ async function runServerlessDeploy() {
     `echo Running sls deploy ${ARGS}...`,
     `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
       export SERVERLESS_ACCESS_KEY="${SERVERLESS_ACCESS_KEY}"
-      echo "::set-env name=SERVERLESS_ACCESS_KEY::${SERVERLESS_ACCESS_KEY}"
     else
       sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
+    `echo "::set-env name=SERVERLESS_ACCESS_KEY::${SERVERLESS_ACCESS_KEY}"`,
     `env`,
     `sls deploy ${ARGS}`
   )
