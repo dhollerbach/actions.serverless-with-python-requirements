@@ -24,12 +24,13 @@ async function installServerlessAndPlugins() {
 async function runServerlessDeploy() {
   await exeq(
     `echo Running sls deploy ${ARGS}...`,
-    `env`,
     `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
       export SERVERLESS_ACCESS_KEY="${SERVERLESS_ACCESS_KEY}"
+      echo "::set-env name=SERVERLESS_ACCESS_KEY::${SERVERLESS_ACCESS_KEY}"
     else
       sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
+    `env`,
     `sls deploy ${ARGS}`
   )
 }
