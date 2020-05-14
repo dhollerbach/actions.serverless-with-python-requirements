@@ -57,7 +57,7 @@ async function runServerlessDeploy() {
     else
       sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi
-    `
+    `,
     `sudo sls deploy ${ARGS}`
   )
 }
