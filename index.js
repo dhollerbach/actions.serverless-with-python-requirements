@@ -63,7 +63,7 @@ async function runServerlessDeploy() {
 
 //  Runs all functions in sequence
 async function handler() {
-  await updateUbuntu()
+  // await updateUbuntu()
   await installPython()
   await installDocker()
   await installServerlessAndPlugins()
