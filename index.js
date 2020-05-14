@@ -55,9 +55,9 @@ async function runServerlessDeploy() {
     `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
       export SERVERLESS_ACCESS_KEY=${SERVERLESS_ACCESS_KEY}
     else
-      sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
+      sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
-    `sls deploy ${ARGS}`
+    `sudo sls deploy ${ARGS}`
   )
 }
 
