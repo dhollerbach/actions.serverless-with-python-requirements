@@ -26,18 +26,40 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 #### AWS Access Keys
 ```
-- name: Deploy
+- name: Set up Node
+  uses: actions/setup-node@v1
+  with:
+    node-version: 12
+
+- name: Set up Python
+  uses: actions/setup-python@v2
+  with:
+    python-version: 3.8  # Update with your python version
+
+- name: Serverless Deploy
   uses: dhollerbach/github-action-serverless-with-python-requirements@master
   with:
     args: '--stage dev'
-    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 #### Serverless Access Key
 ```
-- name: Deploy
+- name: Set up Node
+  uses: actions/setup-node@v1
+  with:
+    node-version: 12
+
+- name: Set up Python
+  uses: actions/setup-python@v2
+  with:
+    python-version: 3.8  # Update with your python version
+
+- name: Serverless Deploy
   uses: dhollerbach/github-action-serverless-with-python-requirements@master
   with:
     args: '--stage dev'
-    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+  env:
+    SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```
