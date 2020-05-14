@@ -30,8 +30,12 @@ async function runServerlessDeploy() {
 
 //  Runs all functions sequentially
 async function handler() {
-  await installServerlessAndPlugins()
-  await runServerlessDeploy()
+  try {
+    await installServerlessAndPlugins()
+    await runServerlessDeploy()
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
 
 //  Main function
