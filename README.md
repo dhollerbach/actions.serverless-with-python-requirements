@@ -8,17 +8,19 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 **Optional** Additional arguments you want to set.
 
+## Environment Variables
+
 ### `aws-access-key-id`
 
-**Optional** Your aws access key id.
+**Conditional** Your aws access key id. Specify along withyour aws secret access key.
 
 ### `aws-secret-access-key`
 
-**Optional** Your aws secret access key.
+**Conditional** Your aws secret access key.
 
 ### `serverless-access-key`
 
-**Optional** Your serverless access key.
+**Conditional** Your serverless access key.
 
 ## Example usage
 

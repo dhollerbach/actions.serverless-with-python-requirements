@@ -5,18 +5,6 @@ inputs:
     default: ''
     description: 'Additional arguments you want to set'
     required: false
-  aws-access-key-id:
-    default: ''
-    description: 'Your aws access key id'
-    required: false
-  aws-secret-access-key:
-    default: ''
-    description: 'Your aws secret access key'
-    required: false
-  serverless-access-key:
-    default: ''
-    description: 'Your serverless access key'
-    required: false
 
 runs:
   using: 'node12'
