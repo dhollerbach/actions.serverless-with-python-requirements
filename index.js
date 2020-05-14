@@ -1,80 +1,36 @@
 //  Packages
 var core = require('@actions/core')
 var execSync = require('child_process').execSync
-code = execSync('sudo npm install exeq --save')
+code = execSync('npm install exeq --save')
 var exeq = require('exeq')
 
-//  Environment Vars
+//  Input variables
 var ARGS = core.getInput('args')
-var AWS_ACCESS_KEY_ID = core.getInput('aws-access-key-id')
-var AWS_SECRET_ACCESS_KEY = core.getInput('aws-secret-access-key')
-// var SERVERLESS_ACCESS_KEY = core.getInput('serverless-access-key')
-
-//  Updates Ubuntu
-async function updateUbuntu() {
-  await exeq(
-    'echo Updating ubuntu...',
-    'sudo apt-get update -y'
-  )
-}
-
-//  Installs python3.7
-async function installPython() {
-  await exeq(
-    'echo Installing python3...',
-    'sudo apt-get install software-properties-common -y',
-    'sudo add-apt-repository ppa:deadsnakes/ppa -y',
-    'sudo apt-get install python3.7 -y',
-    'sudo python --version'
-  )
-}
-
-//  Reinstalls Docker on Ubuntu
-async function installDocker() {
-  await exeq(
-    'echo Installing docker...',
-    'sudo apt-get install docker.io -y',
-    'sudo systemctl unmask docker',
-    'sudo systemctl start docker'
-  )
-}
 
 //  Installs Serverless and specified plugins
 async function installServerlessAndPlugins() {
   await exeq(
     'echo Installing Serverless and plugins...',
-    'sudo npm i serverless -g',
-    'sudo npm i serverless-python-requirements',
-    'sudo npm i serverless-plugin-canary-deployments'
+    'npm i serverless -g',
+    'npm i serverless-python-requirements',
+    'npm i serverless-plugin-canary-deployments'
   )
 }
 
-// //  Uses SERVERLESS_ACCESS_KEY if provided, else AWS credentials
-// async function setServerlessCredentials() {
-//   if (`${SERVERLESS_ACCESS_KEY}`) {
-//     var setCredentials = `export ${SERVERLESS_ACCESS_KEY}`
-//   } else {
-//     var setCredentials = `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`
-//   }
-//   return setCredentials
-// }
-
-//  Runs Serverless deploy including any provided args
+//  Runs Serverless deploy using SERVERLESS_ACCESS_KEY if specified, else AWS Credentials
 async function runServerlessDeploy() {
   await exeq(
-    `echo Running sudo sls deploy ${ARGS}...`,
-    `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`,
-    `sudo sls deploy ${ARGS}`
+    `echo Running sls deploy ${ARGS}...`,
+    `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
+      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} ${ARGS}
+    fi`,
+    `sls deploy ${ARGS}`
   )
 }
 
-//  Runs all functions in sequence
+//  Runs all functions sequentially
 async function handler() {
-  await updateUbuntu()
-  await installDocker()
   await installServerlessAndPlugins()
-  // var setCredentials = await setServerlessCredentials()
-  await installPython()
   await runServerlessDeploy()
 }
 
