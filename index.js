@@ -53,8 +53,7 @@ async function runServerlessDeploy() {
   await exeq(
     `echo Running sudo sls deploy ${ARGS}...`,
     `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
-      export SERVERLESS_ACCESS_KEY=${SERVERLESS_ACCESS_KEY}
-      echo "using serverless"
+      echo "::set-env name=SERVERLESS_ACCESS_KEY::${SERVERLESS_ACCESS_KEY}"
     else
       sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
