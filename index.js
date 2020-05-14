@@ -51,7 +51,7 @@ async function installServerlessAndPlugins() {
 //  Uses SERVERLESS_ACCESS_KEY if provided, else AWS credentials
 async function setServerlessCredentials() {
   if (SERVERLESS_ACCESS_KEY !== '') {
-    var setCredentials = `export SERVERLESS_ACCESS_KEY="${SERVERLESS_ACCESS_KEY}"`
+    var setCredentials = `sudo export SERVERLESS_ACCESS_KEY="${SERVERLESS_ACCESS_KEY}"`
   } else {
     var setCredentials = `sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}`
   }
@@ -62,6 +62,12 @@ async function setServerlessCredentials() {
 async function runServerlessDeploy(setCredentials) {
   await exeq(
     `echo Running sudo sls deploy ${ARGS}...`,
+    // `if [ ${SERVERLESS_ACCESS_KEY} != '' ]; then 
+    //   export SERVERLESS_ACCESS_KEY=${SERVERLESS_ACCESS_KEY}
+    // else
+    //   sudo sls config credentials --provider aws --key ${AWS_ACCESS_KEY_ID} --secret ${AWS_SECRET_ACCESS_KEY} ${ARGS}
+    // fi
+    // `
     `${setCredentials}`,
     `sudo sls deploy ${ARGS}`
   )
