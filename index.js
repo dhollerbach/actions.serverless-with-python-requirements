@@ -11,9 +11,9 @@ var ARGS = core.getInput('args')
 async function installServerlessAndPlugins() {
   await exeq(
     'echo Installing Serverless and plugins...',
-    'sudo npm i serverless -g',
-    'sudo npm i serverless-python-requirements',
-    'sudo npm i serverless-plugin-canary-deployments'
+    'npm i serverless -g',
+    'npm i serverless-python-requirements',
+    'npm i serverless-plugin-canary-deployments'
   )
 }
 
@@ -22,9 +22,9 @@ async function runServerlessDeploy() {
   await exeq(
     `echo Running sls deploy ${ARGS}...`,
     `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
-      sudo sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} ${ARGS}
+      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} ${ARGS}
     fi`,
-    `sudo sls deploy ${ARGS}`
+    `sls deploy ${ARGS}`
   )
 }
 
