@@ -12,15 +12,15 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 ### `aws-access-key-id`
 
-**Conditional** Your aws access key id. Specify along withyour aws secret access key.
+**Conditional** Your aws access key id. Specify together with your aws secret access key.
 
 ### `aws-secret-access-key`
 
-**Conditional** Your aws secret access key.
+**Conditional** Your aws secret access key. Specify together with your aws access key id.
 
 ### `serverless-access-key`
 
-**Conditional** Your serverless access key.
+**Conditional** Your serverless access key. Specify without your aws access key id or your aws secret access key.
 
 ## Example usage
 
