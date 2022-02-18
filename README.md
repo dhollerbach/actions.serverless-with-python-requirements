@@ -37,7 +37,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
     python-version: 3.8  # Update with your python version
 
 - name: Serverless Deploy
-  uses: dhollerbach/github-action-serverless-with-python-requirements@master
+  uses: dhollerbach/actions.serverless-with-python-requirements@master
   with:
     args: '--stage dev'
   env:
@@ -57,7 +57,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
     python-version: 3.8  # Update with your python version
 
 - name: Serverless Deploy
-  uses: dhollerbach/github-action-serverless-with-python-requirements@master
+  uses: dhollerbach/actions.serverless-with-python-requirements@master
   with:
     args: '--stage dev'
   env:
