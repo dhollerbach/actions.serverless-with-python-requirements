@@ -39,7 +39,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@master
   with:
-    args: '--stage dev'
+    args: ''  # any deploy arguments you want to pass
   env:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -59,7 +59,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@master
   with:
-    args: '--stage dev'
+    args: ''  # any deploy arguments you want to pass
   env:
     SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```
