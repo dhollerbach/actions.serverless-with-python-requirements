@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/dhollerbach/github-action-serverless-with-python-requirements#readme",
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^2.1.1",
     "exeq": "^3.0.0"
   }
