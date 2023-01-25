@@ -10,5 +10,3 @@ provider:
 functions:
   hello:
     handler: handler.hello
-    env:
-      PARAMETER: ${param:KEY}
