@@ -9,6 +9,10 @@ inputs:
     default: false
     description: 'Installs the serverless-plugin-canary-deployments plugin'
     required: false
+  domain-manager:
+    default: false
+    description: 'Installs the serverless-domain-manager plugin'
+    required: false
 
 runs:
   using: 'node16'

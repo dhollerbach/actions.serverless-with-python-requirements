@@ -6,6 +6,7 @@ var exeq = require('exeq')
 
 //  Input variables
 var CANARY_DEPLOYMENTS = core.getInput('canary-deployments')
+var DOMAIN_MANAGER = core.getInput('domain-manager')
 
 //  Installs Serverless and specified plugins
 async function installServerlessAndPlugins() {
@@ -16,6 +17,10 @@ async function installServerlessAndPlugins() {
     `if [ ${CANARY_DEPLOYMENTS} = true ]; then
       echo Installing serverless-plugin-canary-deployments...
       npm i serverless-plugin-canary-deployments
+    fi`
+    `if [ ${DOMAIN_MANAGER} = true ]; then
+      echo Installing serverless-domain-manager...
+      npm i serverless-domain-manager
     fi`
   )
 }
