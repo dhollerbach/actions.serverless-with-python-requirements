@@ -14,7 +14,7 @@ async function installServerlessAndPlugins() {
     `echo Installing Serverless and plugins...`,
     `npm i serverless -g`,
     `npm i serverless-python-requirements`,
-    `if [ ${process.env.AWS_ACCESS_KEY_ID} = true ]; then
+    `if [ ${CANARY_DEPLOYMENTS} = true ]; then
       npm i serverless-plugin-canary-deployments
     fi`
   )

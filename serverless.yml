@@ -5,10 +5,10 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.8
+  stage: ${env:stage}
 
 functions:
   hello:
     handler: handler.hello
-    env:
-      ENV_EXAMPLE: ${env:env-example}
-      PARAMETER_EXAMPLE: ${param:param-example}
+    # env:
+      # PARAMETER_EXAMPLE: ${param:param-example}
