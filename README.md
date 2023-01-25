@@ -2,16 +2,6 @@
 
 Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.
 
-## Inputs
-
-### `canary-deployments`
-
-**Optional** Install the serverless-plugin-canary-deployments plugin.
-
-### `domain-manager`
-
-**Optional** Install the serverless-domain-manager plugin.
-
 ## Environment Variables
 
 ### `aws-access-key-id`
@@ -42,9 +32,6 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  with:
-    canary-deployments: false   # set to `true` to enable
-    domain-manager: false       # set to `true` to enable
   env:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -64,9 +51,6 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  with:
-    canary-deployments: false   # set to `true` to enable
-    domain-manager: false       # set to `true` to enable
   env:
     SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
     STAGE: dev

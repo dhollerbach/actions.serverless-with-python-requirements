@@ -1,14 +1,5 @@
 name: 'Serverless with Python Requirements'
 description: 'Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.'
-inputs:
-  canary-deployments:
-    default: false
-    description: 'Installs the serverless-plugin-canary-deployments plugin'
-    required: false
-  domain-manager:
-    default: false
-    description: 'Installs the serverless-domain-manager plugin'
-    required: false
 
 runs:
   using: 'node16'
