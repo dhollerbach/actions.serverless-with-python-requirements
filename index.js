@@ -17,7 +17,7 @@ async function installServerlessAndPlugins() {
     `if [ ${CANARY_DEPLOYMENTS} = true ]; then
       echo Installing serverless-plugin-canary-deployments...
       npm i serverless-plugin-canary-deployments
-    fi`
+    fi`,
     `if [ ${DOMAIN_MANAGER} = true ]; then
       echo Installing serverless-domain-manager...
       npm i serverless-domain-manager
