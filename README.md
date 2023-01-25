@@ -4,9 +4,13 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 ## Inputs
 
-### `args`
+### `canary-deployments`
 
-**Optional** Additional arguments you want to set.
+**Optional** Install the serverless-plugin-canary-deployments plugin.
+
+### `domain-manager`
+
+**Optional** Install the serverless-domain-manager plugin.
 
 ## Environment Variables
 
@@ -65,4 +69,5 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
     domain-manager: false       # set to `true` to enable
   env:
     SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+    STAGE: dev
 ```
