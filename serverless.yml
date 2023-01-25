@@ -10,5 +10,5 @@ provider:
 functions:
   hello:
     handler: handler.hello
-    # env:
-      # PARAMETER_EXAMPLE: ${param:param-example}
+    env:
+      PARAMETER: ${param:KEY}
