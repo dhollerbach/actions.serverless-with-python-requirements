@@ -6,14 +6,17 @@ var exeq = require('exeq')
 
 //  Input variables
 var ARGS = core.getInput('args')
+var CANARY_DEPLOYMENTS = core.getInput('canary-deployments')
 
 //  Installs Serverless and specified plugins
 async function installServerlessAndPlugins() {
   await exeq(
-    'echo Installing Serverless and plugins...',
-    'npm i serverless -g',
-    'npm i serverless-python-requirements',
-    'npm i serverless-plugin-canary-deployments'
+    `echo Installing Serverless and plugins...`,
+    `npm i serverless -g`,
+    `npm i serverless-python-requirements`,
+    `if [ ${process.env.AWS_ACCESS_KEY_ID} = true ]; then
+      npm i serverless-plugin-canary-deployments
+    fi`
   )
 }
 

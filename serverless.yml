@@ -9,3 +9,6 @@ provider:
 functions:
   hello:
     handler: handler.hello
+    env:
+      ENV_EXAMPLE: ${env:env-example}
+      PARAMETER_EXAMPLE: ${param:param-example}
