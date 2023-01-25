@@ -5,7 +5,6 @@ code = execSync('npm install exeq --save')
 var exeq = require('exeq')
 
 //  Input variables
-var ARGS = core.getInput('args')
 var CANARY_DEPLOYMENTS = core.getInput('canary-deployments')
 
 //  Installs Serverless and specified plugins
@@ -24,11 +23,11 @@ async function installServerlessAndPlugins() {
 //  Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
 async function runServerlessDeploy() {
   await exeq(
-    `echo Running sls deploy ${ARGS}...`,
+    `echo Running sls deploy...`,
     `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
-      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} ${ARGS}
+      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY}
     fi`,
-    `sls deploy ${ARGS}`
+    `sls deploy`
   )
 }
 
