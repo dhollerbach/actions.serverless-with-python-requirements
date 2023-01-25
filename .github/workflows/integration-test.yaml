@@ -21,6 +21,7 @@ jobs:
 
       - name: Serverless Deploy
         uses: dhollerbach/actions.serverless-with-python-requirements@develop
+        working-directory: examples
         with:
           args: ''  # any deploy arguments you want to pass
         env:
