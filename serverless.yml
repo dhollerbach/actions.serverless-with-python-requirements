@@ -10,3 +10,8 @@ provider:
 functions:
   hello:
     handler: handler.hello
+
+plugins:
+  - serverless-domain-manager
+  - serverless-plugin-canary-deployments
+  - serverless-python-requirements

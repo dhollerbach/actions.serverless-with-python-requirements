@@ -13,15 +13,9 @@ async function installServerlessAndPlugins() {
   await exeq(
     `echo Installing Serverless and plugins...`,
     `npm i serverless -g`,
-    `npm i serverless-python-requirements`,
-    `if [ ${CANARY_DEPLOYMENTS} = true ]; then
-      echo Installing serverless-plugin-canary-deployments...
-      npm i serverless-plugin-canary-deployments
-    fi`,
-    `if [ ${DOMAIN_MANAGER} = true ]; then
-      echo Installing serverless-domain-manager...
-      npm i serverless-domain-manager
-    fi`
+    `npm i serverless-domain-manager`,
+    `npm i serverless-plugin-canary-deployments`,
+    `npm i serverless-python-requirements`
   )
 }
 

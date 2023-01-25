@@ -1,12 +1,12 @@
-name: Integration Test
+name: Serverless Deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
 jobs:
-  Integration-Test:
+  Serverless-Deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
