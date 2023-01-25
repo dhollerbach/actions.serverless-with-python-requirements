@@ -2,12 +2,6 @@
 
 Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.
 
-## Inputs
-
-### `args`
-
-**Optional** Additional arguments you want to set.
-
 ## Environment Variables
 
 ### `aws-access-key-id`
@@ -26,40 +20,38 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 
 #### AWS Credentials
 ```
-- name: Set up Node
-  uses: actions/setup-node@v1
+- name: Setup Node
+  uses: actions/setup-node@v3
   with:
-    node-version: 12
+    node-version: 16
 
-- name: Set up Python
-  uses: actions/setup-python@v2
+- name: Setup Python
+  uses: actions/setup-python@v4
   with:
-    python-version: 3.8  # Update with your python version
+    python-version: 3.8 
 
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@master
-  with:
-    args: ''  # any deploy arguments you want to pass
+  uses: dhollerbach/actions.serverless-with-python-requirements@v2
   env:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    STAGE: dev
 ```
 #### Serverless Access Key
 ```
-- name: Set up Node
-  uses: actions/setup-node@v1
+- name: Setup Node
+  uses: actions/setup-node@v3
   with:
-    node-version: 12
+    node-version: 16
 
-- name: Set up Python
-  uses: actions/setup-python@v2
+- name: Setup Python
+  uses: actions/setup-python@v4
   with:
-    python-version: 3.8  # Update with your python version
+    python-version: 3.8 
 
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@master
-  with:
-    args: ''  # any deploy arguments you want to pass
+  uses: dhollerbach/actions.serverless-with-python-requirements@v2
   env:
     SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+    STAGE: dev
 ```

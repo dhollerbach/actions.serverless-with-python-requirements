@@ -1,25 +1,10 @@
 {
-  "name": "github-action-serverless-with-python-requirements",
-  "version": "1.0.0",
-  "description": "This actions installs Serverless and runs a deploy using the serverless-python-requirements plugin. You must install the exeq npm package for this plugin to work successfully.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dhollerbach/github-action-serverless-with-python-requirements.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dhollerbach/github-action-serverless-with-python-requirements/issues"
-  },
-  "homepage": "https://github.com/dhollerbach/github-action-serverless-with-python-requirements#readme",
   "dependencies": {
-    "@actions/core": "^1.2.3",
-    "@actions/github": "^2.1.1",
-    "exeq": "^3.0.0"
+    "@actions/core": "^1.10.0",
+    "exeq": "^3.0.0",
+    "serverless": "^3.26.0",
+    "serverless-domain-manager": "^6.2.1",
+    "serverless-plugin-canary-deployments": "^0.8.0",
+    "serverless-python-requirements": "^6.0.0"
   }
 }
