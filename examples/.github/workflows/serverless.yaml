@@ -3,7 +3,7 @@ name: Serverless Deploy
 on:
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   Serverless-Deploy:
@@ -22,7 +22,7 @@ jobs:
           python-version: 3.8 
 
       - name: Serverless Deploy
-        uses: dhollerbach/actions.serverless-with-python-requirements@develop
+        uses: dhollerbach/actions.serverless-with-python-requirements@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
