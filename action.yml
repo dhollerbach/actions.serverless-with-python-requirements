@@ -5,6 +5,10 @@ inputs:
     default: ''
     description: 'Additional arguments you want to set'
     required: false
+  canary-deployments:
+    default: false
+    description: 'Installs the serverless-plugin-canary-deployments plugin'
+    required: false
 
 runs:
   using: 'node16'
