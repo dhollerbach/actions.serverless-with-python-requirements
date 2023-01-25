@@ -17,7 +17,7 @@ async function installServerlessAndPlugins() {
   )
 }
 
-//  Runs Serverless deploy using SERVERLESS_ACCESS_KEY if specified, else AWS Credentials
+//  Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
 async function runServerlessDeploy() {
   await exeq(
     `echo Running sls deploy ${ARGS}...`,
