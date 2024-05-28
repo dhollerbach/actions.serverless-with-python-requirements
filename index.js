@@ -23,16 +23,15 @@ async function runServerlessDeploy() {
   await exeq(
     `echo Running sls deploy...`,
     `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
-      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} --verbose
+      npx sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} --verbose
     fi`,
-    `sls deploy --verbose`
+    `npx sls deploy --verbose`
   )
 }
 
 //  Runs all functions sequentially
 async function handler() {
   try {
-    await installServerlessAndPlugins()
     await runServerlessDeploy()
   } catch (error) {
     core.setFailed(error.message);
