@@ -19,17 +19,6 @@ async function installServerlessAndPlugins() {
 }
 
 //  Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
-// async function runServerlessDeploy() {
-//   await exeq(
-//     `echo Running sls deploy...`,
-//     `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
-//       sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} --verbose
-//     fi`,
-//     `sls deploy --verbose`
-//   )
-// }
-//  Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
-
 async function runServerlessDeploy() {
   await exeq(
     `echo Running sls deploy...`,
