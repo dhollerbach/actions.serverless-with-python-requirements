@@ -41,13 +41,13 @@ async function runServerlessDeploy() {
     // Run Serverless deploy
     } else {
       console.log("Running Serverless deploy (serverless access key)")
-      process.env.SERVERLESS_ACCESS_KEY = SERVERLESS_ACCESS_KEY
-      await exeq(`cd ${WORKING_DIRECTORY} && serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
+      process.env.SERVERLESS_ACCESS_KEY = inputs.SERVERLESS_ACCESS_KEY
+      await exeq(`cd ${inputs.WORKING_DIRECTORY} && serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
     }
 
   } catch (error) {
-    console.error("Serverless Deploy Error:", error);
-    core.setFailed(error.message);
+    console.error("Serverless Deploy Error:", error)
+    core.setFailed(error.message)
   }
 }
 
