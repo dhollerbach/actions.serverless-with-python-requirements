@@ -2,7 +2,7 @@ name: 'Serverless with Python Requirements'
 description: 'Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'index.js'
 
 branding:

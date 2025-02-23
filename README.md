@@ -23,7 +23,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Setup Node
   uses: actions/setup-node@v3
   with:
-    node-version: 16
+    node-version: 20
 
 - name: Setup Python
   uses: actions/setup-python@v4
@@ -42,7 +42,7 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Setup Node
   uses: actions/setup-node@v3
   with:
-    node-version: 16
+    node-version: 20
 
 - name: Setup Python
   uses: actions/setup-python@v4
