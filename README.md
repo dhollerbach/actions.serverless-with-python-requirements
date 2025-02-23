@@ -8,8 +8,6 @@ JavaScript GitHub Action that runs a Serverless deploy using the `serverless-pyt
 |------------------------------------|-------------|--------------|
 | `aws-access-key-id`                | **Conditional** | AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. |
 | `aws-secret-access-key`            | **Conditional** | AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. |
-| `enable-canary-deployments-plugin` | **Optional** | Whether to install `serverless-plugin-canary-deployments`. |
-| `enable-domain-manager-plugin`     | **Optional** | Whether to install `serverless-domain-manager`. |
 | `serverless-access-key`            | **Conditional** | Serverless Access Key. Required if not using AWS credentials. |
 
 ## Example Usage  

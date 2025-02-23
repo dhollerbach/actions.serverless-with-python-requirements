@@ -20,12 +20,7 @@ inputs:
     required: false
     default: ''
 
-  enable-canary-deployments-plugin:
-    description: Whether or not to install serverless-plugin-canary-deployments.
+  serverless-access-key:
+    description: Serverless access key. Required if not using AWS credentials.
     required: false
-    default: 'false'
-
-  enable-domain-manager-plugin:
-    description: Whether or not to install serverless-domain-manager.
-    required: false
-    default: 'false'
+    default: ''
