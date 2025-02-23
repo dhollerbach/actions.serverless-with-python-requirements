@@ -8,7 +8,7 @@ const inputs = {
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
   CONFIG_FILE: core.getInput('config-file'),
   ENABLE_CANARY_DEPLOYMENTS_PLUGIN: core.getInput('enable-canary-deployments-plugin'),
-  ENABLE_DOMAIN_MANAGER_PLUGIN: core.getInput('enable-domain-manager-plugin'),
+  ENABLE_DOMAIN_MANAGER_PLUGIN: core.getInput('enable-domain-manager-plugin')
 }
 
 // Install Serverless
@@ -31,8 +31,13 @@ async function installServerlessPlugin(plugin) {
 async function runServerlessDeploy() {
   await exeq(
     `echo "Running serverless deploy..."`,
-    `[ -n "${inputs.AWS_ACCESS_KEY_ID}" ] && [ -n "${inputs.AWS_SECRET_ACCESS_KEY}" ] && sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose || echo "Using Serverless Access Key"`,
-    `serverless deploy --verbose`
+
+    // Configure AWS credentials if provided
+    `[ -n "${inputs.AWS_ACCESS_KEY_ID}" ] && [ -n "${inputs.AWS_SECRET_ACCESS_KEY}" ] && 
+     sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`,
+
+    // Deploy using config file if specified, otherwise default deploy
+    `[ -n "${inputs.CONFIG_FILE}" ] && serverless deploy --config ${inputs.CONFIG_FILE} --verbose || serverless deploy --verbose`
   )
 }
 
