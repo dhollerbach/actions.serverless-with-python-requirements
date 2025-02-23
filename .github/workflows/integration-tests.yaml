@@ -26,6 +26,7 @@ jobs:
           python-version: ${{ matrix.python-versions }}
 
       - name: Serverless Deploy
+        working-directory: ./examples/
         run: |
           node index.js
         env:

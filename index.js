@@ -6,7 +6,6 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
-  CONFIG_FILE: core.getInput('config-file'),
   ENABLE_CANARY_DEPLOYMENTS_PLUGIN: core.getInput('enable-canary-deployments-plugin'),
   ENABLE_DOMAIN_MANAGER_PLUGIN: core.getInput('enable-domain-manager-plugin')
 }
@@ -37,7 +36,7 @@ async function runServerlessDeploy() {
      sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`,
 
     // Deploy using config file if specified, otherwise default deploy
-    `[ -n "${inputs.CONFIG_FILE}" ] && serverless deploy --config ${inputs.CONFIG_FILE} --verbose || serverless deploy --verbose`
+    `serverless deploy --verbose`
   )
 }
 
