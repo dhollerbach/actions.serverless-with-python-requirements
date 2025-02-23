@@ -6,10 +6,15 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
-  ENABLE_SERVERLESS_DOMAIN_MANAGER: core.getInput('enable-serverless-domain-manager'),
-  ENABLE_SERVERLESS_PLUGIN_CANARY_DEPLOYMENTS: core.getInput('enable-serverless-plugin-canary-deployments'),
   SERVERLESS_ACCESS_KEY: core.getInput('serverless-access-key')
 }
+
+// Serverless plugins
+const plugins = [
+  "serverless-python-requirements",
+  "serverless-domain-manager",
+  "serverless-plugin-canary-deployments"
+]
 
 // Install Serverless
 async function installServerless() {
@@ -44,7 +49,7 @@ async function runServerlessDeploy() {
         `export SERVERLESS_ACCESS_KEY=${inputs.SERVERLESS_ACCESS_KEY} && serverless deploy --verbose || echo "::error:: Serverless deploy failed"`
       )
     }
-    
+
   } catch (error) {
     console.error("Serverless Deploy Error:", error);
     core.setFailed(error.message);
@@ -61,16 +66,9 @@ async function handler() {
     // Install Serverless
     await installServerless()
 
-    // Install serverless-python-requirements
-    await installPlugin("serverless-python-requirements")
-
-    // Install optional Serverless plugins
-    if ( inputs.ENABLE_SERVERLESS_DOMAIN_MANAGER === 'true' ) {
-      await installPlugin("serverless-domain-manager")
-    }
-
-    if ( inputs.ENABLE_SERVERLESS_PLUGIN_CANARY_DEPLOYMENTS === 'true' ) {
-      await installPlugin("serverless-plugin-canary-deployments")
+    // Install Serverless plugins
+    for (const plugin of plugins) {
+      await installPlugin(plugin)
     }
 
     // Run Serverless deploy
