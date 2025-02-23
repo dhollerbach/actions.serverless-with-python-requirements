@@ -6,45 +6,42 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
+  SERVERLESS_ACCESS_KEY: core.getInput('serverless-access-key')
 }
 
-// Install Serverless and plugins from package.json
-async function installServerlessAndPlugins() {
-  await exeq(
-    `echo "Installing Serverless and plugins..."`,
-    `npm install`
-  )
-}
-
-// Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
+// Run Serverless deploy using AWS credentials if specified, else use Serverless access key
 async function runServerlessDeploy() {
-  await exeq(
-    `echo "Running serverless deploy..."`,
-
-    // Configure AWS credentials if provided
-    `[ -n "${inputs.AWS_ACCESS_KEY_ID}" ] && [ -n "${inputs.AWS_SECRET_ACCESS_KEY}" ] && 
-     sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`,
-
-    // Run Serverless deploy
-    `serverless deploy --verbose`
-  )
-}
-
-// Runs all functions sequentially
-async function handler() {
   try {
-    // Install Serverless and plugins
-    // await installServerlessAndPlugins()
+    // AWS credentials
+    if ( inputs.AWS_ACCESS_KEY_ID && inputs.AWS_SECRET_ACCESS_KEY ) {
+      console.log("Running Serverless deploy (AWS credentials)")
+      await exeq(
+        `sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`
+      )
 
-    // Run deployment
-    await runServerlessDeploy()
-
+    // Serverless access key
+    } else {
+      console.log("Running Serverless deploy (serverless access key)")
+      await exeq(
+        `SERVERLESS_ACCESS_KEY=${inputs.SERVERLESS_ACCESS_KEY} serverless deploy --verbose || echo "::error:: Serverless deploy failed"`
+      )
+    }
+    
   } catch (error) {
-    core.setFailed(error.message)
+    console.error("Serverless Deploy Error:", error);
+    core.setFailed(error.message);
   }
 }
 
-// Main function
+// Main functions
 if (require.main === module) {
   handler()
+}
+
+async function handler() {
+  try {
+    await runServerlessDeploy()
+  } catch (error) {
+    core.setFailed(error.message)
+  }
 }
