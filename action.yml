@@ -20,17 +20,12 @@ inputs:
     required: false
     default: ''
 
-  enable-serverless-domain-manager:
-    description: Whether or not to enable serverless-domain-manager.
-    required: false
-    default: 'false'
-
-  enable-serverless-plugin-canary-deployments:
-    description: Whether or not to enable serverless-plugin-canary-deployments.
-    required: false
-    default: 'false'
-
   serverless-access-key:
     description: Serverless access key. Required if not using AWS credentials.
     required: false
     default: ''
+
+  working-directory:
+    description: The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml).
+    required: false
+    default: '.'

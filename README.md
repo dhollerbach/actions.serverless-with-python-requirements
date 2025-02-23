@@ -6,27 +6,16 @@ It also supports optional plugins such as `serverless-domain-manager` and `serve
 ## Inputs  
 
 | Name                                    | Required     | Description  |
-|-----------------------------------------|-------------|--------------|
+|-----------------------------------------|--------------|--------------|
 | `aws-access-key-id`                     | **Conditional** | AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. |
 | `aws-secret-access-key`                 | **Conditional** | AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. |
 | `serverless-access-key`                 | **Conditional** | Serverless Access Key. Required if not using AWS credentials. |
-| `enable-serverless-domain-manager`      | **Optional** | Whether to enable `serverless-domain-manager`. Default: `false`. |
-| `enable-serverless-plugin-canary-deployments` | **Optional** | Whether to enable `serverless-plugin-canary-deployments`. Default: `false`. |
+| `working-directory`                     | **Conditional** | The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml).
 
 ## Example Usage  
 
-### Using AWS Credentials  
+### AWS Credentials  
 ```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v3
-  with:
-    node-version: 20
-
-- name: Setup Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: 3.9
-
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v3
   with:
@@ -34,41 +23,20 @@ It also supports optional plugins such as `serverless-domain-manager` and `serve
     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 
-### Using Serverless Access Key
+### Serverless Access Key
 ```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v3
-  with:
-    node-version: 20
-
-- name: Setup Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: 3.9
-
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v3
   with:
     serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```
 
-### Using Optional Plugins
+### Directory Other Than Root
 ```yaml
-- name: Setup Node.js
-  uses: actions/setup-node@v3
-  with:
-    node-version: 20
-
-- name: Setup Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: 3.9
-
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v3
   with:
     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    enable-serverless-domain-manager: 'true'
-    enable-serverless-plugin-canary-deployments: 'true'
+    working-directory: ./examples/
 ```
