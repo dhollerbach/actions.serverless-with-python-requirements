@@ -1,0 +1,32 @@
+import {
+  AwsCredentialIdentity,
+  AwsCredentialIdentityProvider,
+  HttpAuthScheme,
+} from "@smithy/types";
+import { Route53HttpAuthSchemeProvider } from "./httpAuthSchemeProvider";
+export interface HttpAuthExtensionConfiguration {
+  setHttpAuthScheme(httpAuthScheme: HttpAuthScheme): void;
+  httpAuthSchemes(): HttpAuthScheme[];
+  setHttpAuthSchemeProvider(
+    httpAuthSchemeProvider: Route53HttpAuthSchemeProvider
+  ): void;
+  httpAuthSchemeProvider(): Route53HttpAuthSchemeProvider;
+  setCredentials(
+    credentials: AwsCredentialIdentity | AwsCredentialIdentityProvider
+  ): void;
+  credentials():
+    | AwsCredentialIdentity
+    | AwsCredentialIdentityProvider
+    | undefined;
+}
+export type HttpAuthRuntimeConfig = Partial<{
+  httpAuthSchemes: HttpAuthScheme[];
+  httpAuthSchemeProvider: Route53HttpAuthSchemeProvider;
+  credentials: AwsCredentialIdentity | AwsCredentialIdentityProvider;
+}>;
+export declare const getHttpAuthExtensionConfiguration: (
+  runtimeConfig: HttpAuthRuntimeConfig
+) => HttpAuthExtensionConfiguration;
+export declare const resolveHttpAuthRuntimeConfig: (
+  config: HttpAuthExtensionConfiguration
+) => HttpAuthRuntimeConfig;

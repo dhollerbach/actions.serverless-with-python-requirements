@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFormationClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFormationClient";
+import {
+  DeactivateOrganizationsAccessInput,
+  DeactivateOrganizationsAccessOutput,
+} from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface DeactivateOrganizationsAccessCommandInput
+  extends DeactivateOrganizationsAccessInput {}
+export interface DeactivateOrganizationsAccessCommandOutput
+  extends DeactivateOrganizationsAccessOutput,
+    __MetadataBearer {}
+declare const DeactivateOrganizationsAccessCommand_base: {
+  new (
+    input: DeactivateOrganizationsAccessCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    DeactivateOrganizationsAccessCommandInput,
+    DeactivateOrganizationsAccessCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [DeactivateOrganizationsAccessCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    DeactivateOrganizationsAccessCommandInput,
+    DeactivateOrganizationsAccessCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class DeactivateOrganizationsAccessCommand extends DeactivateOrganizationsAccessCommand_base {
+  protected static __types: {
+    api: {
+      input: {};
+      output: {};
+    };
+    sdk: {
+      input: DeactivateOrganizationsAccessCommandInput;
+      output: DeactivateOrganizationsAccessCommandOutput;
+    };
+  };
+}
