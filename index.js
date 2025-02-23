@@ -10,19 +10,11 @@ const inputs = {
   ENABLE_DOMAIN_MANAGER_PLUGIN: core.getInput('enable-domain-manager-plugin')
 }
 
-// Install Serverless
-async function installServerless() {
+// Install Serverless and plugins from package.json
+async function installServerlessAndPlugins() {
   await exeq(
-    `echo "Installing Serverless..."`,
-    `npm install -g serverless`
-  )
-}
-
-// Install Serverless plugin
-async function installServerlessPlugin(plugin) {
-  await exeq(
-    `echo "Installing ${plugin}..."`,
-    `npm install ${plugin}`
+    `echo "Installing Serverless and plugins..."`,
+    `npm install`
   )
 }
 
@@ -43,20 +35,8 @@ async function runServerlessDeploy() {
 // Runs all functions sequentially
 async function handler() {
   try {
-    // Install Serverless
-    await installServerless()
-
-    // Install serverless-python-requirements plugin
-    await installServerlessPlugin('serverless-python-requirements')
-
-    // Install additional plugins if enabled
-    if (inputs.ENABLE_CANARY_DEPLOYMENTS_PLUGIN === 'true') {
-      await installServerlessPlugin('serverless-plugin-canary-deployments')
-    }
-
-    if (inputs.ENABLE_DOMAIN_MANAGER_PLUGIN === 'true') {
-      await installServerlessPlugin('serverless-domain-manager')
-    }
+    // Install Serverless and plugins
+    await installServerlessAndPlugins()
 
     // Run deployment
     await runServerlessDeploy()
