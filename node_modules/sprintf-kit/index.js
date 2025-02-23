@@ -6,7 +6,7 @@ var getPartsResolver = require("./get-parts-resolver")
 module.exports = function (modifiers) {
 	var resolveParts = getPartsResolver(modifiers);
 
-	return function (formatIgnored /*, ...params*/) {
+	return function (formatIgnored/*, ...params*/) {
 		return formatParts(resolveParts.apply(null, arguments));
 	};
 };

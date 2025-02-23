@@ -1,7 +1,5 @@
-'use strict';
+"use strict";
 
-var resolveSeparated  = require('./resolve-separated');
+var resolveSeparated = require("./resolve-separated");
 
-module.exports = function (code/*, limit*/) {
-	return resolveSeparated(code, '+', arguments[1]);
-};
+module.exports = function (code/*, limit*/) { return resolveSeparated(code, "+", arguments[1]); };

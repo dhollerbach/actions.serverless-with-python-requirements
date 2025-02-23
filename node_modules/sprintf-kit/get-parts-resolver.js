@@ -60,7 +60,7 @@ var resolveResultWithPlaceholders = function (modifiers, data, args, result) {
 module.exports = function (modifiers) {
 	validateModifiers(modifiers);
 
-	return function (format /*, ...params*/) {
+	return function (format/*, ...params*/) {
 		var result;
 		if (typeof format !== "string") {
 			return {

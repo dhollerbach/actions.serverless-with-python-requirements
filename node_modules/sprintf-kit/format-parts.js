@@ -13,7 +13,7 @@ module.exports = function (parts) {
 	var resolvedString = literals.length
 		? literals.reduce(function (resolved, literal, index) {
 				return resolved + substitutions[index - 1].value + literal;
-		  })
+			})
 		: "";
 	if (isValue(parts.rest)) resolvedString += ensureString(parts.rest);
 	return resolvedString;

@@ -125,12 +125,13 @@ async function pipAcceptsSystem(pythonBin, pluginInstance) {
 /**
  * Install requirements described from requirements in the targetFolder into that same targetFolder
  * @param {string} targetFolder
- * @param {Object} serverless
- * @param {Object} options
+ * @param {Object} pluginInstance
+ * @param {Object} funcOptions
  * @return {undefined}
  */
-async function installRequirements(targetFolder, pluginInstance) {
-  const { options, serverless, log, progress } = pluginInstance;
+async function installRequirements(targetFolder, pluginInstance, funcOptions) {
+  const { options, serverless, log, progress, dockerImageForFunction } =
+    pluginInstance;
   const targetRequirementsTxt = path.join(targetFolder, 'requirements.txt');
 
   let installProgress;
@@ -253,7 +254,7 @@ async function installRequirements(targetFolder, pluginInstance) {
           buildDockerImageProgress && buildDockerImageProgress.remove();
         }
       } else {
-        dockerImage = options.dockerImage;
+        dockerImage = dockerImageForFunction(funcOptions);
       }
       if (log) {
         log.info(`Docker Image: ${dockerImage}`);
@@ -327,12 +328,17 @@ async function installRequirements(targetFolder, pluginInstance) {
         }
         // Install requirements with pip
         // Set the ownership of the current folder to user
-        pipCmds.push([
-          'chown',
-          '-R',
-          `${process.getuid()}:${process.getgid()}`,
-          '/var/task',
-        ]);
+        // If you use docker-rootless, you don't need to set the ownership
+        if (options.dockerRootless !== true) {
+          pipCmds.push([
+            'chown',
+            '-R',
+            `${process.getuid()}:${process.getgid()}`,
+            '/var/task',
+          ]);
+        } else {
+          pipCmds.push(['chown', '-R', '0:0', '/var/task']);
+        }
       } else {
         // Use same user so --cache-dir works
         dockerCmd.push('-u', await getDockerUid(bindPath, pluginInstance));
@@ -345,12 +351,16 @@ async function installRequirements(targetFolder, pluginInstance) {
       if (process.platform === 'linux') {
         if (options.useDownloadCache) {
           // Set the ownership of the download cache dir back to user
-          pipCmds.push([
-            'chown',
-            '-R',
-            `${process.getuid()}:${process.getgid()}`,
-            dockerDownloadCacheDir,
-          ]);
+          if (options.dockerRootless !== true) {
+            pipCmds.push([
+              'chown',
+              '-R',
+              `${process.getuid()}:${process.getgid()}`,
+              dockerDownloadCacheDir,
+            ]);
+          } else {
+            pipCmds.push(['chown', '-R', '0:0', dockerDownloadCacheDir]);
+          }
         }
       }
 
@@ -423,8 +433,8 @@ async function installRequirements(targetFolder, pluginInstance) {
         }
 
         if (log) {
-          log.info(`Stdout: ${e.stdoutBuffer}`);
-          log.info(`Stderr: ${e.stderrBuffer}`);
+          log.error(`Stdout: ${e.stdoutBuffer}`);
+          log.error(`Stderr: ${e.stderrBuffer}`);
         } else {
           serverless.cli.log(`Stdout: ${e.stdoutBuffer}`);
           serverless.cli.log(`Stderr: ${e.stderrBuffer}`);
@@ -691,7 +701,7 @@ async function installRequirementsIfNeeded(
   fse.copySync(slsReqsTxt, path.join(workingReqsFolder, 'requirements.txt'));
 
   // Then install our requirements from this folder
-  await installRequirements(workingReqsFolder, pluginInstance);
+  await installRequirements(workingReqsFolder, pluginInstance, funcOptions);
 
   // Copy vendor libraries to requirements folder
   if (options.vendor) {

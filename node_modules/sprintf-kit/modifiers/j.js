@@ -11,7 +11,7 @@ var CIRCULAR_JSON_ERROR_MESSAGE = (function () {
 	}
 })();
 
-module.exports = function (value /*, placeholder, argIndex, args*/) {
+module.exports = function (value/*, placeholder, argIndex, args*/) {
 	try {
 		var result = JSON.stringify(value, null, 2);
 		if (typeof result === "string") return result;
