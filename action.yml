@@ -11,12 +11,12 @@ branding:
 
 inputs:
   aws-access-key-id:
-    description: AWS Access Key ID (optional). Required if using AWS credentials instead of Serverless Access Key.
+    description: AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key.
     required: false
     default: ''
 
   aws-secret-access-key:
-    description: AWS Secret Access Key (optional). Required if using AWS credentials instead of Serverless Access Key.
+    description: AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key.
     required: false
     default: ''
 
