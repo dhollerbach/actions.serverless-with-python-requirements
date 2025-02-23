@@ -32,6 +32,11 @@ async function installPlugin(plugin) {
 // Run Serverless deploy using AWS credentials if specified, else use Serverless access key
 async function runServerlessDeploy() {
   try {
+    // Change the working directory
+    if (inputs.WORKING_DIRECTORY) {
+      console.log(`Changing working directory to ${inputs.WORKING_DIRECTORY}...`)
+      process.chdir(inputs.WORKING_DIRECTORY)
+    }
 
     // Configure AWS credentials
     if ( inputs.AWS_ACCESS_KEY_ID && inputs.AWS_SECRET_ACCESS_KEY ) {
@@ -42,7 +47,7 @@ async function runServerlessDeploy() {
     } else {
       console.log("Running Serverless deploy (serverless access key)")
       process.env.SERVERLESS_ACCESS_KEY = inputs.SERVERLESS_ACCESS_KEY
-      await exeq(`cd ${inputs.WORKING_DIRECTORY} && serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
+      await exeq(`serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
     }
 
   } catch (error) {
