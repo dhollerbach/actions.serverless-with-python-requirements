@@ -32,9 +32,13 @@ async function installPlugin(plugin) {
 // Run Serverless deploy using AWS credentials if specified, else use Serverless access key
 async function runServerlessDeploy() {
   try {
+
+    // Configure AWS credentials
     if ( inputs.AWS_ACCESS_KEY_ID && inputs.AWS_SECRET_ACCESS_KEY ) {
       console.log("Running Serverless deploy (AWS credentials)")
       await exeq(`sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`)
+
+    // Run Serverless deploy
     } else {
       console.log("Running Serverless deploy (serverless access key)")
       process.env.SERVERLESS_ACCESS_KEY = SERVERLESS_ACCESS_KEY
