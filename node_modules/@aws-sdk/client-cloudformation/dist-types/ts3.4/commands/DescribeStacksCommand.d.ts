@@ -1,0 +1,47 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFormationClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFormationClient";
+import { DescribeStacksInput, DescribeStacksOutput } from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface DescribeStacksCommandInput extends DescribeStacksInput {}
+export interface DescribeStacksCommandOutput
+  extends DescribeStacksOutput,
+    __MetadataBearer {}
+declare const DescribeStacksCommand_base: {
+  new (
+    input: DescribeStacksCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    DescribeStacksCommandInput,
+    DescribeStacksCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [DescribeStacksCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    DescribeStacksCommandInput,
+    DescribeStacksCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class DescribeStacksCommand extends DescribeStacksCommand_base {
+  protected static __types: {
+    api: {
+      input: DescribeStacksInput;
+      output: DescribeStacksOutput;
+    };
+    sdk: {
+      input: DescribeStacksCommandInput;
+      output: DescribeStacksCommandOutput;
+    };
+  };
+}
