@@ -40,7 +40,8 @@ async function runServerlessDeploy() {
     // Serverless access key
     } else {
       console.log("Running Serverless deploy (serverless access key)")
-      await exeq(`export SERVERLESS_ACCESS_KEY=${inputs.SERVERLESS_ACCESS_KEY} && serverless deploy --verbose || echo "::error:: Serverless deploy failed"`, { cwd: WORKING_DIRECTORY })
+      process.env.SERVERLESS_ACCESS_KEY = SERVERLESS_ACCESS_KEY
+      await exeq(`serverless deploy --verbose || echo "::error:: Serverless deploy failed"`, { cwd: WORKING_DIRECTORY })
     }
 
   } catch (error) {

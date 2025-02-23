@@ -10,24 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-versions: [20]
-        python-versions: [3.9]
+        examples: [
+          ./examples/aws_credentials
+        ]
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-versions }}
+          node-version: 20
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-versions }}
+          python-version: 3.9
 
       - name: Serverless Deploy
         uses: ./
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          working-directory: ./examples/
+          working-directory: ${{ matrix.examples }}
