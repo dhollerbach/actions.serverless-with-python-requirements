@@ -34,7 +34,7 @@ async function runServerlessDeploy() {
 async function handler() {
   try {
     // Install Serverless and plugins
-    await installServerlessAndPlugins
+    await installServerlessAndPlugins()
 
     // Run deployment
     await runServerlessDeploy()
