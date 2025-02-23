@@ -6,8 +6,11 @@ on:
       - master
 
 jobs:
-  Serverless-Deploy:
+  serverless-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./examples/
     strategy:
       matrix:
         node-versions: [20]
