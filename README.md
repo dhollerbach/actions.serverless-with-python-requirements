@@ -65,7 +65,6 @@ JavaScript GitHub Action that runs a Serverless deploy using the `serverless-pyt
 
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v3
-  working-directory: ./examples/
   with:
     serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```
