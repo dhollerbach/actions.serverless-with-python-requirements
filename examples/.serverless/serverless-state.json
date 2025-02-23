@@ -174,7 +174,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/examples/dev/1740339572748-2025-02-23T19:39:32.748Z/examples.zip"
+                "S3Key": "serverless/examples/dev/1740352158961-2025-02-23T23:09:18.961Z/examples.zip"
               },
               "Handler": "handler.hello",
               "Runtime": "python3.9",
@@ -329,6 +329,7 @@
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
       "service": "examples",
+      "frameworkVersion": "3",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
@@ -344,7 +345,7 @@
     "artifact": "/Users/davehollerbach/repos/actions.serverless-with-python-requirements/examples/.serverless/examples.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/examples/dev/1740339572748-2025-02-23T19:39:32.748Z",
+    "artifactDirectoryName": "serverless/examples/dev/1740352158961-2025-02-23T23:09:18.961Z",
     "artifact": "examples.zip"
   }
 }

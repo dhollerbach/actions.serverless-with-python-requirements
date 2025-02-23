@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/examples/dev/1740339572748-2025-02-23T19:39:32.748Z/examples.zip"
+          "S3Key": "serverless/examples/dev/1740352158961-2025-02-23T23:09:18.961Z/examples.zip"
         },
         "Handler": "handler.hello",
         "Runtime": "python3.9",
