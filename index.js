@@ -1,45 +1,68 @@
-//  Packages
-var core = require('@actions/core')
-var execSync = require('child_process').execSync
-code = execSync('npm install exeq --save')
-var exeq = require('exeq')
+// Packages
+const core = require('@actions/core')
+const exeq = require('exeq')
 
-//  Input variables
-var CANARY_DEPLOYMENTS = core.getInput('canary-deployments')
-var DOMAIN_MANAGER = core.getInput('domain-manager')
+// Input variables
+const inputs = {
+  AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
+  AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
+  CONFIG_FILE: core.getInput('config-file'),
+  ENABLE_CANARY_DEPLOYMENTS_PLUGIN: core.getInput('enable-canary-deployments-plugin'),
+  ENABLE_DOMAIN_MANAGER_PLUGIN: core.getInput('enable-domain-manager-plugin'),
+}
 
-//  Installs Serverless and specified plugins
-async function installServerlessAndPlugins() {
+// Install Serverless
+async function installServerless() {
   await exeq(
-    `echo Installing Serverless and plugins...`,
-    `npm i serverless -g`,
-    `npm i serverless-plugin-canary-deployments`,
-    `npm i serverless-python-requirements`
+    `echo "Installing Serverless..."`,
+    `npm install -g serverless`
   )
 }
 
-//  Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
+// Install Serverless plugin
+async function installServerlessPlugin(plugin) {
+  await exeq(
+    `echo "Installing ${plugin}..."`,
+    `npm install ${plugin}`
+  )
+}
+
+// Runs Serverless deploy using AWS Credentials if specified, else SERVERLESS ACCESS KEY
 async function runServerlessDeploy() {
   await exeq(
-    `echo Running sls deploy...`,
-    `if [ ${process.env.AWS_ACCESS_KEY_ID} ] && [ ${process.env.AWS_SECRET_ACCESS_KEY} ]; then
-      sls config credentials --provider aws --key ${process.env.AWS_ACCESS_KEY_ID} --secret ${process.env.AWS_SECRET_ACCESS_KEY} --verbose
-    fi`,
-    `sls deploy --verbose`
+    `echo "Running serverless deploy..."`,
+    `[ -n "${inputs.AWS_ACCESS_KEY_ID}" ] && [ -n "${inputs.AWS_SECRET_ACCESS_KEY}" ] && sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose || echo "Using Serverless Access Key"`,
+    `serverless deploy --verbose`
   )
 }
 
-//  Runs all functions sequentially
+// Runs all functions sequentially
 async function handler() {
   try {
-    await installServerlessAndPlugins()
+    // Install Serverless
+    await installServerless()
+
+    // Install serverless-python-requirements plugin
+    await installServerlessPlugin('serverless-python-requirements')
+
+    // Install additional plugins if enabled
+    if (inputs.ENABLE_CANARY_DEPLOYMENTS_PLUGIN === 'true') {
+      await installServerlessPlugin('serverless-plugin-canary-deployments')
+    }
+
+    if (inputs.ENABLE_DOMAIN_MANAGER_PLUGIN === 'true') {
+      await installServerlessPlugin('serverless-domain-manager')
+    }
+
+    // Run deployment
     await runServerlessDeploy()
+
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message)
   }
 }
 
-//  Main function
+// Main function
 if (require.main === module) {
   handler()
 }

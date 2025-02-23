@@ -1,26 +1,23 @@
-# Serverless with Python Requirements
+# Serverless with Python Requirements  
 
-Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.
+JavaScript GitHub Action that runs a Serverless deploy using the `serverless-python-requirements` plugin.  
 
-## Environment Variables
+## Inputs  
 
-### `aws-access-key-id`
+| Name                               | Required     | Description  |
+|------------------------------------|-------------|--------------|
+| `aws-access-key-id`                | **Conditional** | AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. |
+| `aws-secret-access-key`            | **Conditional** | AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. |
+| `config-file`                      | **Optional** | Path to your Serverless config file (e.g., serverless.yml, serverless.yaml).|
+| `enable-canary-deployments-plugin` | **Optional** | Whether to install `serverless-plugin-canary-deployments`. |
+| `enable-domain-manager-plugin`     | **Optional** | Whether to install `serverless-domain-manager`. |
+| `serverless-access-key`            | **Conditional** | Serverless Access Key. Required if not using AWS credentials. |
 
-**Conditional** Your aws access key id.
+## Example Usage  
 
-### `aws-secret-access-key`
-
-**Conditional** Your aws secret access key.
-
-### `serverless-access-key`
-
-**Conditional** Your serverless access key.
-
-## Example usage
-
-#### AWS Credentials
-```
-- name: Setup Node
+### Using AWS Credentials  
+```yaml
+- name: Setup Node.js
   uses: actions/setup-node@v3
   with:
     node-version: 20
@@ -28,18 +25,18 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Setup Python
   uses: actions/setup-python@v4
   with:
-    python-version: 3.8 
+    python-version: 3.9
 
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  env:
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    STAGE: dev
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
-#### Serverless Access Key
-```
-- name: Setup Node
+
+### Using Serverless Access Key
+```yaml
+- name: Setup Node.js
   uses: actions/setup-node@v3
   with:
     node-version: 20
@@ -47,11 +44,29 @@ Javascript action that runs a Serverless deploy using the serverless-python-requ
 - name: Setup Python
   uses: actions/setup-python@v4
   with:
-    python-version: 3.8 
+    python-version: 3.9
 
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  env:
-    SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-    STAGE: dev
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+```
+
+### Using Serverless config in a different path
+```yaml
+- name: Setup Node.js
+  uses: actions/setup-node@v3
+  with:
+    node-version: 20
+
+- name: Setup Python
+  uses: actions/setup-python@v4
+  with:
+    python-version: 3.9
+
+- name: Serverless Deploy
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    config-file: ./infra/serverless.yml
+    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```

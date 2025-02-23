@@ -1,10 +1,36 @@
-name: 'Serverless with Python Requirements'
-description: 'Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.'
+name: Serverless with Python Requirements
+description: JavaScript action that runs a Serverless deploy using the serverless-python-requirements plugin.
 
 runs:
-  using: 'node20'
-  main: 'index.js'
+  using: node20
+  main: index.js
 
 branding:
-  icon: 'fast-forward'
-  color: 'red'
+  icon: fast-forward
+  color: red
+
+inputs:
+  aws-access-key-id:
+    description: AWS Access Key ID (optional). Required if using AWS credentials instead of Serverless Access Key.
+    required: false
+    default: ''
+
+  aws-secret-access-key:
+    description: AWS Secret Access Key (optional). Required if using AWS credentials instead of Serverless Access Key.
+    required: false
+    default: ''
+
+  config-file:
+    description: Path to your Serverless config file (e.g., serverless.yml, serverless.yaml).
+    required: false
+    default: ''
+
+  enable-canary-deployments-plugin:
+    description: Whether or not to install serverless-plugin-canary-deployments.
+    required: false
+    default: 'false'
+
+  enable-domain-manager-plugin:
+    description: Whether or not to install serverless-domain-manager.
+    required: false
+    default: 'false'
