@@ -20,8 +20,6 @@ const plugins = [
 
 // Install Serverless
 async function installServerless() {
-  
-
   if (inputs.FRAMEWORK) {
     console.log(`Installing serverless@${inputs.FRAMEWORK} and plugins...`)
     await exeq(`npm i serverless@${inputs.FRAMEWORK} -g`)
@@ -34,33 +32,33 @@ async function installServerless() {
 // Install plugins
 async function installPlugin(plugin) {
   console.log(`Installing ${plugin}...`)
-  await exeq(`npm i ${plugin}`)
+  await exeq(`npm i ${plugin} --no-save`)
 }
 
 // Run Serverless deploy using AWS credentials if specified, else use Serverless access key
 async function runServerlessDeploy() {
   try {
+    // Configure Serverless access key
+    if (inputs.SERVERLESS_ACCESS_KEY) {
+      console.log("Setting Serverless access key.")
+      process.env.SERVERLESS_ACCESS_KEY = inputs.SERVERLESS_ACCESS_KEY
+    }
+
+    // Configure AWS credentials
+    if (inputs.AWS_ACCESS_KEY_ID && inputs.AWS_SECRET_ACCESS_KEY) {
+      console.log("Setting AWS credentials.")
+      await exeq(`serverless config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`)
+    }
+
     // Change the working directory
     if (inputs.WORKING_DIRECTORY) {
       console.log(`Changing working directory to ${inputs.WORKING_DIRECTORY}...`)
       process.chdir(inputs.WORKING_DIRECTORY)
     }
 
-    // Configure Serverless access key
-    if (inputs.SERVERLESS_ACCESS_KEY) {
-      process.env.SERVERLESS_ACCESS_KEY = inputs.SERVERLESS_ACCESS_KEY
-    }
-
-    // Configure AWS credentials
-    if (inputs.AWS_ACCESS_KEY_ID && inputs.AWS_SECRET_ACCESS_KEY) {
-      console.log("Running Serverless deploy (AWS credentials)")
-      await exeq(`sls config credentials --provider aws --key ${inputs.AWS_ACCESS_KEY_ID} --secret ${inputs.AWS_SECRET_ACCESS_KEY} --verbose`)
-
     // Run Serverless deploy
-    } else {
-      console.log("Running Serverless deploy (serverless access key)")
-      await exeq(`serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
-    }
+    console.log("Running Serverless deploy")
+    await exeq(`serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
 
   } catch (error) {
     console.error("Serverless Deploy Error:", error)
