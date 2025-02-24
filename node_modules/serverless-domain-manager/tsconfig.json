@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "target": "es6",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "outDir": "dist",
+    "declaration": true,
+    "types": [
+      "mocha",
+      "node"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "test/**/*.ts"
+  ]
+}
