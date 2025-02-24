@@ -21,10 +21,10 @@ const plugins = [
 // Install Serverless
 async function installServerless() {
   if (inputs.FRAMEWORK) {
-    console.log(`Installing serverless@${inputs.FRAMEWORK} and plugins...`)
+    console.log(`Installing serverless@${inputs.FRAMEWORK}...`)
     await exeq(`npm i serverless@${inputs.FRAMEWORK} -g`)
   } else {
-    console.log("Installing serverless@latest and plugins...")
+    console.log("Installing serverless@latest...")
     await exeq(`npm i serverless -g`)
   }
 }
