@@ -1,4 +1,4 @@
-service: actions.serverless-with-python-requirements.serverless_access_key
+service: serverless-with-python-requirements-serverless-access-key
 
 frameworkVersion: '3'
 
