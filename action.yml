@@ -21,7 +21,7 @@ inputs:
     default: ''
 
   framework:
-    description: The Serverless framework version to install. Defaults to latest.
+    description: The Serverless framework version to install.
     required: false
 
   serverless-access-key:

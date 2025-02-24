@@ -2,7 +2,8 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "exeq": "^3.0.0",
-    "serverless": "^3.26.0",
+    "serverless-v3": "npm:serverless@3.26.0",
+    "serverless-v4": "npm:serverless@4.64.0",
     "serverless-domain-manager": "^8.0.0",
     "serverless-plugin-canary-deployments": "^0.8.0",
     "serverless-python-requirements": "^6.1.2"
