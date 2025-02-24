@@ -1,0 +1,78 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
+import { DeleteSSHPublicKeyRequest } from "../models/models_0";
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+export { $Command };
+/**
+ * @public
+ *
+ * The input for {@link DeleteSSHPublicKeyCommand}.
+ */
+export interface DeleteSSHPublicKeyCommandInput extends DeleteSSHPublicKeyRequest {
+}
+/**
+ * @public
+ *
+ * The output of {@link DeleteSSHPublicKeyCommand}.
+ */
+export interface DeleteSSHPublicKeyCommandOutput extends __MetadataBearer {
+}
+declare const DeleteSSHPublicKeyCommand_base: {
+    new (input: DeleteSSHPublicKeyCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteSSHPublicKeyCommandInput, DeleteSSHPublicKeyCommandOutput, IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    new (__0_0: DeleteSSHPublicKeyCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteSSHPublicKeyCommandInput, DeleteSSHPublicKeyCommandOutput, IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+/**
+ * <p>Deletes the specified SSH public key.</p>
+ *          <p>The SSH public key deleted by this operation is used only for authenticating the
+ *             associated IAM user to an CodeCommit repository. For more information about using SSH keys
+ *             to authenticate to an CodeCommit repository, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up CodeCommit for
+ *                 SSH connections</a> in the <i>CodeCommit User Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IAMClient, DeleteSSHPublicKeyCommand } from "@aws-sdk/client-iam"; // ES Modules import
+ * // const { IAMClient, DeleteSSHPublicKeyCommand } = require("@aws-sdk/client-iam"); // CommonJS import
+ * const client = new IAMClient(config);
+ * const input = { // DeleteSSHPublicKeyRequest
+ *   UserName: "STRING_VALUE", // required
+ *   SSHPublicKeyId: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteSSHPublicKeyCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteSSHPublicKeyCommandInput - {@link DeleteSSHPublicKeyCommandInput}
+ * @returns {@link DeleteSSHPublicKeyCommandOutput}
+ * @see {@link DeleteSSHPublicKeyCommandInput} for command's `input` shape.
+ * @see {@link DeleteSSHPublicKeyCommandOutput} for command's `response` shape.
+ * @see {@link IAMClientResolvedConfig | config} for IAMClient's `config` shape.
+ *
+ * @throws {@link NoSuchEntityException} (client fault)
+ *  <p>The request was rejected because it referenced a resource entity that does not exist. The
+ *       error message describes the resource.</p>
+ *
+ * @throws {@link IAMServiceException}
+ * <p>Base exception class for all service exceptions from IAM service.</p>
+ *
+ * @public
+ */
+export declare class DeleteSSHPublicKeyCommand extends DeleteSSHPublicKeyCommand_base {
+    /** @internal type navigation helper, not in runtime. */
+    protected static __types: {
+        api: {
+            input: DeleteSSHPublicKeyRequest;
+            output: {};
+        };
+        sdk: {
+            input: DeleteSSHPublicKeyCommandInput;
+            output: DeleteSSHPublicKeyCommandOutput;
+        };
+    };
+}

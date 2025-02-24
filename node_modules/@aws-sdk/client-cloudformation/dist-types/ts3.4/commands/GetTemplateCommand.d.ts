@@ -1,0 +1,47 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFormationClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFormationClient";
+import { GetTemplateInput, GetTemplateOutput } from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface GetTemplateCommandInput extends GetTemplateInput {}
+export interface GetTemplateCommandOutput
+  extends GetTemplateOutput,
+    __MetadataBearer {}
+declare const GetTemplateCommand_base: {
+  new (
+    input: GetTemplateCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    GetTemplateCommandInput,
+    GetTemplateCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [GetTemplateCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    GetTemplateCommandInput,
+    GetTemplateCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class GetTemplateCommand extends GetTemplateCommand_base {
+  protected static __types: {
+    api: {
+      input: GetTemplateInput;
+      output: GetTemplateOutput;
+    };
+    sdk: {
+      input: GetTemplateCommandInput;
+      output: GetTemplateCommandOutput;
+    };
+  };
+}

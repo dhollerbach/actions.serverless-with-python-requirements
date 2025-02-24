@@ -1,0 +1,47 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFormationClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFormationClient";
+import { DeactivateTypeInput, DeactivateTypeOutput } from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface DeactivateTypeCommandInput extends DeactivateTypeInput {}
+export interface DeactivateTypeCommandOutput
+  extends DeactivateTypeOutput,
+    __MetadataBearer {}
+declare const DeactivateTypeCommand_base: {
+  new (
+    input: DeactivateTypeCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    DeactivateTypeCommandInput,
+    DeactivateTypeCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [DeactivateTypeCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    DeactivateTypeCommandInput,
+    DeactivateTypeCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class DeactivateTypeCommand extends DeactivateTypeCommand_base {
+  protected static __types: {
+    api: {
+      input: DeactivateTypeInput;
+      output: {};
+    };
+    sdk: {
+      input: DeactivateTypeCommandInput;
+      output: DeactivateTypeCommandOutput;
+    };
+  };
+}

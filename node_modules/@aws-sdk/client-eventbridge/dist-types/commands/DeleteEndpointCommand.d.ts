@@ -1,0 +1,82 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
+import { DeleteEndpointRequest, DeleteEndpointResponse } from "../models/models_0";
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+export { $Command };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEndpointCommand}.
+ */
+export interface DeleteEndpointCommandInput extends DeleteEndpointRequest {
+}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEndpointCommand}.
+ */
+export interface DeleteEndpointCommandOutput extends DeleteEndpointResponse, __MetadataBearer {
+}
+declare const DeleteEndpointCommand_base: {
+    new (input: DeleteEndpointCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteEndpointCommandInput, DeleteEndpointCommandOutput, EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    new (__0_0: DeleteEndpointCommandInput): import("@smithy/smithy-client").CommandImpl<DeleteEndpointCommandInput, DeleteEndpointCommandOutput, EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+/**
+ * <p>Delete an existing global endpoint. For more information about global endpoints, see
+ *         <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event
+ *         replication</a> in the <i>
+ *                <i>Amazon EventBridge User Guide</i>
+ *             </i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EventBridgeClient, DeleteEndpointCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
+ * // const { EventBridgeClient, DeleteEndpointCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * const client = new EventBridgeClient(config);
+ * const input = { // DeleteEndpointRequest
+ *   Name: "STRING_VALUE", // required
+ * };
+ * const command = new DeleteEndpointCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param DeleteEndpointCommandInput - {@link DeleteEndpointCommandInput}
+ * @returns {@link DeleteEndpointCommandOutput}
+ * @see {@link DeleteEndpointCommandInput} for command's `input` shape.
+ * @see {@link DeleteEndpointCommandOutput} for command's `response` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ * @public
+ */
+export declare class DeleteEndpointCommand extends DeleteEndpointCommand_base {
+    /** @internal type navigation helper, not in runtime. */
+    protected static __types: {
+        api: {
+            input: DeleteEndpointRequest;
+            output: {};
+        };
+        sdk: {
+            input: DeleteEndpointCommandInput;
+            output: DeleteEndpointCommandOutput;
+        };
+    };
+}

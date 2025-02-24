@@ -1,0 +1,50 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFormationClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFormationClient";
+import {
+  ListResourceScansInput,
+  ListResourceScansOutput,
+} from "../models/models_0";
+export { __MetadataBearer };
+export { $Command };
+export interface ListResourceScansCommandInput extends ListResourceScansInput {}
+export interface ListResourceScansCommandOutput
+  extends ListResourceScansOutput,
+    __MetadataBearer {}
+declare const ListResourceScansCommand_base: {
+  new (
+    input: ListResourceScansCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListResourceScansCommandInput,
+    ListResourceScansCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListResourceScansCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListResourceScansCommandInput,
+    ListResourceScansCommandOutput,
+    CloudFormationClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListResourceScansCommand extends ListResourceScansCommand_base {
+  protected static __types: {
+    api: {
+      input: ListResourceScansInput;
+      output: ListResourceScansOutput;
+    };
+    sdk: {
+      input: ListResourceScansCommandInput;
+      output: ListResourceScansCommandOutput;
+    };
+  };
+}

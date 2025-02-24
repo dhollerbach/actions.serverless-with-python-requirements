@@ -1,0 +1,85 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import { EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EventBridgeClient";
+import { ActivateEventSourceRequest } from "../models/models_0";
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+export { $Command };
+/**
+ * @public
+ *
+ * The input for {@link ActivateEventSourceCommand}.
+ */
+export interface ActivateEventSourceCommandInput extends ActivateEventSourceRequest {
+}
+/**
+ * @public
+ *
+ * The output of {@link ActivateEventSourceCommand}.
+ */
+export interface ActivateEventSourceCommandOutput extends __MetadataBearer {
+}
+declare const ActivateEventSourceCommand_base: {
+    new (input: ActivateEventSourceCommandInput): import("@smithy/smithy-client").CommandImpl<ActivateEventSourceCommandInput, ActivateEventSourceCommandOutput, EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    new (__0_0: ActivateEventSourceCommandInput): import("@smithy/smithy-client").CommandImpl<ActivateEventSourceCommandInput, ActivateEventSourceCommandOutput, EventBridgeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes>;
+    getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+/**
+ * <p>Activates a partner event source that has been deactivated. Once activated, your matching
+ *       event bus will start receiving events from the event source.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { EventBridgeClient, ActivateEventSourceCommand } from "@aws-sdk/client-eventbridge"; // ES Modules import
+ * // const { EventBridgeClient, ActivateEventSourceCommand } = require("@aws-sdk/client-eventbridge"); // CommonJS import
+ * const client = new EventBridgeClient(config);
+ * const input = { // ActivateEventSourceRequest
+ *   Name: "STRING_VALUE", // required
+ * };
+ * const command = new ActivateEventSourceCommand(input);
+ * const response = await client.send(command);
+ * // {};
+ *
+ * ```
+ *
+ * @param ActivateEventSourceCommandInput - {@link ActivateEventSourceCommandInput}
+ * @returns {@link ActivateEventSourceCommandOutput}
+ * @see {@link ActivateEventSourceCommandInput} for command's `input` shape.
+ * @see {@link ActivateEventSourceCommandOutput} for command's `response` shape.
+ * @see {@link EventBridgeClientResolvedConfig | config} for EventBridgeClient's `config` shape.
+ *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>There is concurrent modification on a rule, target, archive, or replay.</p>
+ *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception occurs due to unexpected causes.</p>
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  <p>The specified state is not a valid state for an event source.</p>
+ *
+ * @throws {@link OperationDisabledException} (client fault)
+ *  <p>The operation you are attempting is not available in this region.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>An entity that you specified does not exist.</p>
+ *
+ * @throws {@link EventBridgeServiceException}
+ * <p>Base exception class for all service exceptions from EventBridge service.</p>
+ *
+ * @public
+ */
+export declare class ActivateEventSourceCommand extends ActivateEventSourceCommand_base {
+    /** @internal type navigation helper, not in runtime. */
+    protected static __types: {
+        api: {
+            input: ActivateEventSourceRequest;
+            output: {};
+        };
+        sdk: {
+            input: ActivateEventSourceCommandInput;
+            output: ActivateEventSourceCommandOutput;
+        };
+    };
+}
