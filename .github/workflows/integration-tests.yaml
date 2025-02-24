@@ -28,12 +28,16 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Serverless Deploy (AWS Credentials)
         if: ${{ matrix.examples == './examples/aws_credentials' }}
         uses: ./
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           framework: 3.26.0
           working-directory: ${{ matrix.examples }}
 

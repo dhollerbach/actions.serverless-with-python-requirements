@@ -32,6 +32,20 @@ It also supports optional plugins such as `serverless-domain-manager` and `serve
     serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 ```
 
+### Separate AWS Credentials Step
+```yaml
+- name: Configure AWS Credentials
+  uses: aws-actions/configure-aws-credentials@v4
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+- name: Serverless Deploy
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+```
+
 ### Directory Other Than Root
 ```yaml
 - name: Serverless Deploy
