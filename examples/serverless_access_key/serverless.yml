@@ -1,6 +1,6 @@
 service: serverless-with-python-requirements-serverless-access-key
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws

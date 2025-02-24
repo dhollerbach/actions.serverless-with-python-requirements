@@ -32,7 +32,7 @@ async function installServerless() {
 // Install plugins
 async function installPlugin(plugin) {
   console.log(`Installing ${plugin}...`)
-  await exeq(`npm i ${plugin} --no-save`)
+  await exeq(`serverless plugin install -n ${plugin}`)
 }
 
 // Run Serverless deploy using AWS credentials if specified, else use Serverless access key
