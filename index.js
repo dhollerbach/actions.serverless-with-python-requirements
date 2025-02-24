@@ -6,8 +6,8 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
+  FRAMEWORK: core.getInput('framework').toString(),
   SERVERLESS_ACCESS_KEY: core.getInput('serverless-access-key'),
-  SERVERLESS_FRAMEWORK: core.getInput('serverless-framework').toString(),
   WORKING_DIRECTORY: core.getInput('working-directory')
 }
 
@@ -20,11 +20,13 @@ const plugins = [
 
 // Install Serverless
 async function installServerless() {
-  console.log("Installing Serverless and plugins...")
+  
 
-  if (inputs.SERVERLESS_FRAMEWORK) {
-    await exeq(`npm i serverless@${inputs.SERVERLESS_FRAMEWORK} -g`)
+  if (inputs.FRAMEWORK) {
+    console.log(`Installing serverless@${inputs.FRAMEWORK} and plugins...`)
+    await exeq(`npm i serverless@${inputs.FRAMEWORK} -g`)
   } else {
+    console.log("Installing serverless@latest and plugins...")
     await exeq(`npm i serverless -g`)
   }
 }
