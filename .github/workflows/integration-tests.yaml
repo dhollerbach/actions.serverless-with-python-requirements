@@ -9,6 +9,7 @@ jobs:
   serverless-deploy:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         examples: [
           ./examples/aws_credentials,
@@ -40,6 +41,5 @@ jobs:
         if: ${{ matrix.examples == './examples/serverless_access_key' }}
         uses: ./
         with:
-          framework: 4.6.3
           serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           working-directory: ${{ matrix.examples }}

@@ -1,4 +1,4 @@
-service: serverless-with-python-requirements-aws-credentials
+service: aws-credentials
 
 frameworkVersion: '3'
 
