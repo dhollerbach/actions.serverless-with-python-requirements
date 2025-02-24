@@ -6,7 +6,7 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
-  FRAMEWORK: core.getInput('framework'),
+  FRAMEWORK: core.getInput('framework').toString(),
   SERVERLESS_ACCESS_KEY: core.getInput('serverless-access-key'),
   WORKING_DIRECTORY: core.getInput('working-directory')
 }
@@ -56,14 +56,9 @@ async function runServerlessDeploy() {
       process.chdir(inputs.WORKING_DIRECTORY)
     }
 
-    // Determine Serverless version to use
-    const serverlessCmd = inputs.FRAMEWORK.startsWith('3') 
-    ? 'npx serverless@3 deploy --verbose' 
-    : 'npx serverless@4 deploy --verbose'
-
     // Run Serverless deploy
     console.log("Running Serverless deploy")
-    await exeq(`${serverlessCmd} || echo "::error:: Serverless deploy failed"`)
+    await exeq(`serverless deploy --verbose || echo "::error:: Serverless deploy failed"`)
 
   } catch (error) {
     console.error("Serverless Deploy Error:", error)
