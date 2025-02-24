@@ -1,0 +1,50 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  serverless-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        examples: [
+          ./examples/aws_credentials,
+          ./examples/serverless_access_key
+        ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Serverless Deploy (AWS Credentials)
+        if: ${{ matrix.examples == './examples/aws_credentials' }}
+        uses: ./
+        with:
+          framework: 3.26.0
+          working-directory: ${{ matrix.examples }}
+
+      - name: Serverless Deploy (Serverless Access Key)
+        if: ${{ matrix.examples == './examples/serverless_access_key' }}
+        uses: ./
+        with:
+          serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          working-directory: ${{ matrix.examples }}

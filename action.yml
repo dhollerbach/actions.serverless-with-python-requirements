@@ -1,10 +1,35 @@
-name: 'Serverless with Python Requirements'
-description: 'Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.'
+name: Serverless with Python Requirements
+description: JavaScript action that runs a Serverless deploy using the serverless-python-requirements plugin.
 
 runs:
-  using: 'node16'
-  main: 'index.js'
+  using: node20
+  main: index.js
 
 branding:
-  icon: 'fast-forward'
-  color: 'red'
+  icon: fast-forward
+  color: red
+
+inputs:
+  aws-access-key-id:
+    description: AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. Serverless V4 requires a serverless access key.
+    required: false
+    default: ''
+
+  aws-secret-access-key:
+    description: AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. Serverless V4 requires a serverless access key.
+    required: false
+    default: ''
+
+  framework:
+    description: The Serverless framework version to install.
+    required: false
+
+  serverless-access-key:
+    description: Serverless access key. Required if not using AWS credentials. Serverless V4 requires a serverless access key.
+    required: false
+    default: ''
+
+  working-directory:
+    description: The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml).
+    required: false
+    default: '.'

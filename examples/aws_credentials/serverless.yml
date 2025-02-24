@@ -1,0 +1,16 @@
+service: aws-credentials
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  stage: dev
+
+functions:
+  hello:
+    handler: handler.hello
+
+plugins:
+  - serverless-plugin-canary-deployments
+  - serverless-python-requirements

@@ -1,57 +1,70 @@
-# Serverless with Python Requirements
+# Serverless with Python Requirements  
 
-Javascript action that runs a Serverless deploy using the serverless-python-requirements plugin.
+JavaScript GitHub Action that runs a Serverless deploy using the `serverless-python-requirements` plugin.  
+It also supports optional plugins such as `serverless-domain-manager` and `serverless-plugin-canary-deployments`.  
 
-## Environment Variables
+See [examples](./examples/) for multiple example configurations.
 
-### `aws-access-key-id`
+## Inputs  
 
-**Conditional** Your aws access key id.
+| Name                                    | Required     | Description  |
+|-----------------------------------------|--------------|--------------|
+| `aws-access-key-id`                     | **Conditional** | AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. Serverless V4 requires a Serverless access key. |
+| `aws-secret-access-key`                 | **Conditional** | AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. Serverless V4 requires a Serverless access key. |
+| `framework`                             | **Optional** | The Serverless framework version to install. Defaults to latest. |
+| `serverless-access-key`                 | **Conditional** | Serverless access key. Required if not using AWS credentials. Serverless V4 requires a Serverless access key. |
+| `working-directory`                     | **Optional** | The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml). Defaults to the current directory. |
 
-### `aws-secret-access-key`
+## Example Usage  
 
-**Conditional** Your aws secret access key.
-
-### `serverless-access-key`
-
-**Conditional** Your serverless access key.
-
-## Example usage
-
-#### AWS Credentials
+### AWS Credentials  
+```yaml
+- name: Serverless Deploy
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
-- name: Setup Node
-  uses: actions/setup-node@v3
-  with:
-    node-version: 16
 
-- name: Setup Python
-  uses: actions/setup-python@v4
+### Serverless Access Key (required if using Serverless V4)
+```yaml
+- name: Serverless Deploy
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
   with:
-    python-version: 3.8 
+    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+```
+
+### Separate AWS Credentials Step
+```yaml
+- name: Configure AWS Credentials
+  uses: aws-actions/configure-aws-credentials@v4
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    aws-region: us-east-1
 
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  env:
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    STAGE: dev
-```
-#### Serverless Access Key
-```
-- name: Setup Node
-  uses: actions/setup-node@v3
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
   with:
-    node-version: 16
+    serverless-access-key: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+```
 
-- name: Setup Python
-  uses: actions/setup-python@v4
-  with:
-    python-version: 3.8 
-
+### Directory Other Than Root
+```yaml
 - name: Serverless Deploy
-  uses: dhollerbach/actions.serverless-with-python-requirements@v2
-  env:
-    SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-    STAGE: dev
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    working-directory: ./examples/
+```
+
+### Specific Serverless Framework
+```yaml
+- name: Serverless Deploy
+  uses: dhollerbach/actions.serverless-with-python-requirements@v3
+  with:
+    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    framework: 3.26.0
 ```
