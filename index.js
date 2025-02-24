@@ -6,7 +6,7 @@ const exeq = require('exeq')
 const inputs = {
   AWS_ACCESS_KEY_ID: core.getInput('aws-access-key-id'),
   AWS_SECRET_ACCESS_KEY: core.getInput('aws-secret-access-key'),
-  FRAMEWORK: core.getInput('framework').toString(),
+  FRAMEWORK: core.getInput('framework'),
   SERVERLESS_ACCESS_KEY: core.getInput('serverless-access-key'),
   WORKING_DIRECTORY: core.getInput('working-directory')
 }
