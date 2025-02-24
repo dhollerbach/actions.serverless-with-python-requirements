@@ -39,6 +39,7 @@ It also supports optional plugins such as `serverless-domain-manager` and `serve
   with:
     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    aws-region: us-east-1
 
 - name: Serverless Deploy
   uses: dhollerbach/actions.serverless-with-python-requirements@v3
