@@ -20,14 +20,14 @@ inputs:
     required: false
     default: ''
 
+  framework:
+    description: The Serverless framework version to install. Defaults to latest.
+    required: false
+
   serverless-access-key:
     description: Serverless access key. Required if not using AWS credentials.
     required: false
     default: ''
-
-  serverless-framework:
-    description: The Serverless framework version to install. Defaults to latest.
-    required: false
 
   working-directory:
     description: The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml).

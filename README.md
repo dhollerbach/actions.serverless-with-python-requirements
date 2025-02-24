@@ -9,6 +9,7 @@ It also supports optional plugins such as `serverless-domain-manager` and `serve
 |-----------------------------------------|--------------|--------------|
 | `aws-access-key-id`                     | **Conditional** | AWS Access Key ID. Required if using AWS credentials instead of Serverless Access Key. |
 | `aws-secret-access-key`                 | **Conditional** | AWS Secret Access Key. Required if using AWS credentials instead of Serverless Access Key. |
+| `framework`                             | **Conditional** | The Serverless framework version to install. Defaults to latest. |
 | `serverless-access-key`                 | **Conditional** | Serverless Access Key. Required if not using AWS credentials. |
 | `working-directory`                     | **Conditional** | The working directory to run Serverless deploy in. Must contain the Serverless config file (e.g. serverless.yaml, serverless.yml).
 
